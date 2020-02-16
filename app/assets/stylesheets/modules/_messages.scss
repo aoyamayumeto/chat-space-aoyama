@@ -24,24 +24,21 @@
           font-size: 16px;
           font-weight: bold;
           color: #ffffff;
-
         }
         &__icons {
           display: flex;
-          
+          width: 60px;
           .right-icon {
             .my-white {
               color: white;
             }
-          
           }
           .left-icon {
-            .my-white{
+            .my-white {
               color: white;
             }
             margin-right: 5px;
           }
-
         }
       }
     }
@@ -147,7 +144,6 @@
           border: solid 1px #38aef0;
           position: relative;
           text-align: center;
-        
           .edit-text {
             height: 25px;
             width: 32px;
@@ -158,22 +154,15 @@
             left: 0;
             right: 0;
             margin: auto;
-            .hoge {
+            a {
               color: #38aef0;
               text-decoration: none;
             }
           }
         }
       }
-          
-
     }
 
-      
-    
-
-
-    
     &__message-list {
       background-color: #fafafa;
       height: calc(100vh - 190px);
@@ -202,7 +191,6 @@
           font-weight: bold;
           color: #434A54;
         }
-        
       }
       .message-list2 {
         margin: 0 auto 46px 40px;
@@ -223,8 +211,7 @@
           font-size: 14px;
           font-weight: bold;
           color: #434A54;
-        }
-        
+        }  
       }
       .message-list3 {
         margin: 0 auto 46px 40px;
@@ -246,15 +233,12 @@
           font-weight: bold;
           color: #434A54;
         }
-        
       }
-
     }
     &__message-form {
       background-color: #d2d2d2;
       height: 90px;
       width: calc(100vw - 300px);
-
       margin-top: calc(100vh - 90px);
       display: flex;
       align-items: center;
@@ -263,9 +247,7 @@
         display: flex;
         padding-left: 40px;
         position: relative;
-
         &__text {
-          
           height: 50px;
           width: 100%;
           padding-left: 10px;
@@ -274,16 +256,10 @@
           position: absolute;
           top: 20px;
           right: 10px;
-          
-          
           &__file {
             display: none;
           }
         }          
-
-
-        
-
       }
       .submit-btn {
         height: 50px;
@@ -293,10 +269,6 @@
         background-color: #38aef0;
         color: white;
       }
-    }
-      
-
-      
+    } 
   }
 }
-
