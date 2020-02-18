@@ -1,0 +1,44 @@
+.main-chat__group-info
+  .top-items__left
+    .group-name
+      test
+      .group-member
+        Member:Aoyama
+  .top-items__right
+    .edit-box
+      .edit-text
+        = link_to 'Edit', '#'
+
+.main-chat__message-list
+  .message-list1
+    .message-list1__user
+      Aoyama 
+      .message-list1__user__date
+        2019/11/20(Wed) 17:43:01
+    .message-list1__message
+      おはよう！
+  .message-list2
+    .message-list2__user
+      Aoyama 
+      .message-list2__user__date
+        2019/11/20(Wed) 17:43:01
+    .message-list2__message
+      おはよう！
+  .message-list3
+    .message-list3__user
+      Aoyama 
+      .message-list3__user__date
+        2019/11/20(Wed) 17:43:01
+    .message-list3__message
+      おはよう！
+  
+.main-chat__message-form
+  .input-box
+    %input{class: "input-box__text", type: "text", placeholder: "type a message"}
+    %label{class: "input-box__image"}
+      %i.far.fa-image.fa-lg
+      %input{type: "file", class: "input-box__image__file"}
+  %input{class: "submit-btn", type: "submit", value: "Send"}
+
+
+
