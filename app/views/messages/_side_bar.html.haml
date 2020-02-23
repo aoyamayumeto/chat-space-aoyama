@@ -1,13 +1,13 @@
 .side-bar__user-name
   .top-items
     .top-items__name
-      Aoyama
+      = current_user.name
     .top-items__icons
       .left-icon
         = link_to "#" do
           %span.fas.fa-edit.my-white
       .right-icon
-        = link_to "#" do
+        = link_to edit_user_path(current_user) do
           %span.fas.fa-cog.my-white
 
 .side-bar__group-list
