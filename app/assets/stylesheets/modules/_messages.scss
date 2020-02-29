@@ -83,13 +83,13 @@
       .top-items__left {
         margin-top: 35px;
         margin-left: 40px;
-        .group-name {
+        &__group-name {
           font-size: 20px;
           font-weight: bold;
           color: #333333;
-          .group-member {
+          &__group-member {
             margin-top: 15px;
-            font-size: 12px;
+            font-size: 5px;
             font-weight: bold;
             color: #999999;
           }
@@ -201,33 +201,37 @@
       margin-top: calc(100vh - 90px);
       display: flex;
       align-items: center;
-      .input-box {
-        width: 100%;
+
+      .new_message {
         display: flex;
-        padding-left: 40px;
         position: relative;
-        &__text {
+        width: 100%;
+        padding-left: 40px;
+        .message-form__text {
           height: 50px;
           width: 100%;
           padding-left: 10px;
-        }
-        &__image {
+          display: flex;
+        }  
+        .message-form__image {         
+          top: 10px;
+          right: 90px;
           position: absolute;
-          top: 20px;
-          right: 10px;
           &__file {
             display: none;
           }
-        }          
+        }
+                  
+        .submit-btn {
+          height: 50px;
+          width: 15%;
+          margin-right: 40px;
+          margin-left: 15px;
+          background-color: #38aef0;
+          color: white;
+        }
       }
-      .submit-btn {
-        height: 50px;
-        width: 15%;
-        margin-right: 40px;
-        margin-left: 15px;
-        background-color: #38aef0;
-        color: white;
-      }
-    } 
-  }
+    }
+  }  
 }
+
