@@ -4,9 +4,9 @@
   .top-items__left
     .top-items__left__group-name
       = @group.name
-      .top-items__left__group-name__group-member
+    .top-items__left__group-member
       - @group.users.each do |user|
-        = user.name
+        = "Member : #{user.name} "
   .top-items__right
     .edit-box
       .edit-text
