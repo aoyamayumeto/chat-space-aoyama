@@ -58,11 +58,14 @@ $('#new_message').on('submit', function(e){
     $('.main-chat__message-list').append(html);      
     $('form')[0].reset();
     $('.main-chat__message-list').animate({ scrollTop: $('.main-chat__message-list')[0].scrollHeight});
-    $('.submit-btn').prop("disabled", false);
   });
 
+  .always(function(){
+    $('.submit-btn').prop("disabled", false);
+  });
+  
   .fail(function() {
     alert("メッセージ送信に失敗しました");
-})
+  });
 
-});
+})
