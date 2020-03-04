@@ -1,71 +1,111 @@
-$(function(){ 
-  function buildHTML(message){
-   if ( message.image ) {
-     var html =
-      `<div class="main-chat__message-list">
-         <div class="message-list1">
-           <div class="message-list1__user">
-             ${message.user_name}
-           </div>
-           <div class="message-list1__user__date">
-             ${message.created_at}
-           </div>
-         </div>
-         <div class="message-list1__message">
-           <p class="message-list1__content">
-             ${message.content}
-           </p>
-         </div>
-         <img src=${message.image} >
-       </div>`
-     return html;
-   } else {
-     var html =
-      `<div class="main-chat__message-list">
-         <div class="message-list1">
-           <div class="message-list1__user">
-             ${message.user_name}
-           </div>
-           <div class="message-list1__user__date">
-             ${message.created_at}
-           </div>
-         </div>
-         <div class="message-list1__message">
-           <p class="message-list1__content">
-             ${message.content}
-           </p>
-         </div>
-       </div>`
-     return html;
-   };
- }
-$('#new_message').on('submit', function(e){
- e.preventDefault();
- var formData = new FormData(this);
- var url = $(this).attr('action')
+$(function() { 
+  var buildHTML = function(message) {
+    if ( message.content && message.image ) {
+      var html = `<div class="message-list1" data-message-id=` + message.id + `>` +
+          `<div class="message-list1__user">` +
+            message.user_name +
+            `<div class="message-list1__user__date">` +
+              message.created_at +
+            `</div>` +
+          `</div>` +
+          `<div class="message-list1__message">` +
+            message.content +
+            `<img src="` + message.image + `" class="message-list1__image" >` +
+          `</div>` +
+      `</div>`
+    } else if (message.content) {
+      //同様に、data-idが反映されるようにしている
+      var html = `<div class="message-list1" data-message-id=` + message.id + `>` +
+          `<div class="message-list1__user">` +
+            message.user_name +
+            `<div class="message-list1__user__date">` +
+              message.created_at +
+            `</div>` +
+          `</div>` +
+          `<div class="message-list1__message">` +
+            message.content +
+          `</div>` +
+        `</div>` +
+      `</div>`
+    } else if (message.image) {
+      //同様に、data-idが反映されるようにしている
+      var html = `<div class="message-list1" data-message-id=` + message.id + `>` +
+          `<div class="message-list1__user">` +
+            message.user_name +
+            `<div class="message-list1__user__date">` +
+              message.created_at +
+            `</div>` +
+          `</div>` +
+          `<div class="message-list1__message">` +
+            `<img src="` + message.image + `" class="message-list1__image" >` +
+          `</div>` +
+        `</div>` +
+      `</div>`
+    };
+    return html;
+  };
+
+  $('#new_message').on('submit', function(e){
+    e.preventDefault();
+    var formData = new FormData(this);
+    var url = $(this).attr('action')
+    
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: formData,
+      dataType: 'json',
+      processData: false,
+      contentType: false,
+    })
+   
+     .done(function(data){
+       var html = buildHTML(data);
+       $('.main-chat__message-list').append(html);      
+       $('form')[0].reset();
+       $('.main-chat__message-list').animate({ scrollTop: $('.main-chat__message-list')[0].scrollHeight});
+     })
+   
+     .always(function(){
+       $('.submit-btn').prop("disabled", false);
+     })
+     
+     .fail(function() {
+       alert("メッセージ送信に失敗しました");
+     });
+  })
+
  
- $.ajax({
-   url: url,
-   type: "POST",
-   data: formData,
-   dataType: 'json',
-   processData: false,
-   contentType: false
- })
+  var reloadMessages = function() {
+   if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    var last_message_id = $('.message-list1:last').data("message-id");
 
-  .done(function(data){
-    var html = buildHTML(data);
-    $('.main-chat__message-list').append(html);      
-    $('form')[0].reset();
-    $('.main-chat__message-list').animate({ scrollTop: $('.main-chat__message-list')[0].scrollHeight});
-  });
+    $.ajax({
+      url: "api/messages",
+      type: 'get',
+      data: {id: last_message_id},
+      dataType: 'json',
+    })
 
-  .always(function(){
-    $('.submit-btn').prop("disabled", false);
-  });
+     .done(function(messages){
+       if (messages.length !== 0) {
+         var insertHTML = '';
+         $.each(messages, function(i, message) {
+           insertHTML += buildHTML(message)
+         })
+         $('.main-chat__message-list').append(insertHTML)
+         $('.main-chat__message-list').animate({ scrollTop: $('.main-chat__message-list')[0].scrollHeight}, 'fast')
+       }
+     })
+
+     .always(function() {
+       $('.submit-btn').prop("disabled", false);
+     })
   
-  .fail(function() {
-    alert("メッセージ送信に失敗しました");
-  });
-
-})
+     .fail(function() {
+       alert("メッセージ送信に失敗しました");
+     });
+   }
+  }
+   setInterval(reloadMessages, 7000);
+  })
