@@ -80,6 +80,7 @@
       position: absolute;
       display: flex; 
       .top-items__left {
+        width: 100%;
         margin-top: 35px;
         margin-left: 40px;
         position: relative;
@@ -90,8 +91,16 @@
         }
         &__group-member {
           margin-top: 15px;
+          display: flex;
           font-size: 12px;
           color: #999999;
+          .member-text {
+
+          }
+          .member-user {
+            margin-left: 5px;
+          }
+
         }
        
       }
